@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="photo-wall" version="1.0"author="WinToGo-LZP">
+    <title>雾色山脉工作室-照片墙</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #C1C5CA;
+            color: #fff;
+            padding: 10px 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .photo-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            width: 90%;
+            max-width: 1200px;
+        }
+        .photo-wall img {
+            width: 200px; /* 固定宽度 */
+            height: 200px; /* 固定高度 */
+            object-fit: cover; /* 保持图片比例并填充整个区域 */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .photo-wall img:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .modal-content {
+            margin: 10% auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 700px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #000;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 20px;
+            background-color: #C1C5CA;
+            color: #fff;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+        .button1{
+            padding: 10px 10px;
+            font-size: 20px;
+            color: #fff;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+ /*       .button2{
+            padding: 10px 10px;
+            font-size: 20px;
+            color: #fff;
+            background-color: green;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }*/
+    </style>
+</head>
+<body>
+    <header>
+        <h1>雾色山脉工作室<body onload="getD1()"><div id="datetime"></div></body></h1>
+    </header>
+   
+        
+        </body>
+
+    <div class="photo-wall">
+        <img src="img/1.jpg" alt="照片1" class="photo" data-src="img/1.jpg">
+        <img src="img/2.jpg" alt="照片2" class="photo" data-src="img/2.jpg">
+        <img src="img/3.jpg" alt="照片3" class="photo" data-src="img/3.jpg">
+        <img src="img/4.jpg" alt="照片4" class="photo" data-src="img/4.jpg">
+        <img src="img/5.jpg" alt="照片5" class="photo" data-src="img/5.jpg">
+        <img src="img/6.jpg" alt="照片6" class="photo" data-src="img/6.jpg">
+        <img src="img/7.jpg" alt="照片7" class="photo" data-src="img/7.jpg">
+        
+    </div>
+    <div class="button">
+        <a class="button1"href="pay.html" style="color:white">打赏</a>
+      <!--  <a class="button2"href="https://www.baidu.com" style="color:white">联系我们</a>-->
+    </div>
+
+    <!-- 模态框 -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="img01" style="width:100%" alt="">
+        </div>
+    </div>
+
+    <footer>
+        <p>©Copyright 2022-2025 朝阳计划</p>
+    </footer>
+
+    <script>
+        // 获取所有图片
+        const photos = document.querySelectorAll('.photo');
+        const modal = document.getElementById('myModal');
+        const modalImg = document.getElementById('img01');
+        const span = document.getElementsByClassName('close')[0];
+
+        // 遍历所有图片，添加点击事件
+        photos.forEach(photo => {
+            photo.addEventListener('click', function() {
+                modal.style.display = 'block';
+                modalImg.src = this.getAttribute('data-src');
+            });
+        });
+
+        // 点击关闭按钮关闭模态框
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // 点击模态框外部区域关闭模态框
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        function getD1() {
+        var date = new Date();
+        var d1 = date.toLocaleString();
+        document.getElementById("datetime").innerHTML = d1;
+        }
+        setInterval("getD1();", 1000);
+    </script>
+</body>
+</html>
